@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f1eeee;
+}
+
+.container {
+  width: 320px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+form input, button {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0;
+}
+
+.actions button {
+  margin-left: 5px;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: white;
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+}
