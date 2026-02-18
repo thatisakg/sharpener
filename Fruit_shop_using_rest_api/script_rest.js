@@ -14,7 +14,6 @@ async function fetchProducts() {
   }
 }
 
-
 async function addToShop() {
   const name = document.getElementById("name").value;
   const price = Number(document.getElementById("price").value);
