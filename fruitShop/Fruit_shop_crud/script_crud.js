@@ -1,4 +1,4 @@
-const API_URL = "https://crudcrud.com/api/b4510df7731646cc8b1afd5a3411e4d0/products";
+const API_URL = "https://6a032cca0d92f63dd2551287.mockapi.io/products";
 
 let products = [];
 
@@ -38,23 +38,28 @@ async function addToShop() {
 }
 
 async function buyProduct(id) {
-  const product = products.find(p => p._id === id);
+  const product = products.find(p => p.id === id);
   const qty = Number(document.getElementById(`buy-${id}`).value);
 
-  if (!qty || qty > product.quantity) {
+  if (!qty || qty <= 0 || qty > product.quantity) {
     alert("Invalid quantity");
     return;
   }
 
   const updatedProduct = {
-    name: product.name,
-    price: product.price,
+    ...product,
     quantity: product.quantity - qty
   };
 
   try {
-    await axios.put(`${API_URL}/${id}`, updatedProduct);
-    fetchProducts();
+    const response = await axios.put(`${API_URL}/${id}`, updatedProduct);
+
+    // update local array properly
+    products = products.map(p =>
+      p.id === id ? response.data : p
+    );
+
+    renderProducts();
   } catch (error) {
     console.error("Error updating product:", error);
   }
@@ -63,7 +68,11 @@ async function buyProduct(id) {
 async function deleteProduct(id) {
   try {
     await axios.delete(`${API_URL}/${id}`);
-    fetchProducts();
+    
+    // remove locally (faster UI update)
+    products = products.filter(p => p.id !== id);
+    
+    renderProducts();
   } catch (error) {
     console.error("Error deleting product:", error);
   }
@@ -78,9 +87,9 @@ function renderProducts() {
 
     li.innerHTML = `
       <span>${p.name} — Rs:${p.price} — ${p.quantity} KG</span>
-      <input type="number" min="1" id="buy-${p._id}">
-      <button onclick="buyProduct('${p._id}')">Buy</button>
-      <button onclick="deleteProduct('${p._id}')">Delete</button>
+     <input type="number" min="1" id="buy-${p.id}">
+    <button onclick="buyProduct('${p.id}')">Buy</button>
+    <button onclick="deleteProduct('${p.id}')">Delete</button>
     `;
 
     list.appendChild(li);
