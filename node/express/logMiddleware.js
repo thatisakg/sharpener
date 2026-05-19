@@ -1,4 +1,6 @@
 const express = require('express');
+const categoryRoutes = require('./routes/categories');
+const productRoutes = require('./routes/products');
 
 const app = express();
 
@@ -7,21 +9,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/products', (req, res) => {
-  res.send('Here is the list of all products.', Date.now());
-});
-
-app.post('/products', (req, res) => {
-  res.send('A new product has been added.');
-});
-
-app.get('/categories', (req, res) => {
-  res.send('Here is the list of all categories.');
-});
-
-app.post('/categories', (req, res) => {
-  res.send('A new category has been created.');
-});
+app.use(productRoutes);
+app.use(categoryRoutes);
 
 app.listen(4000, () => {
   console.log(`Server is running on http://localhost:4000`);
