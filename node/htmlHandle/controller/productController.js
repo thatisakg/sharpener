@@ -1,9 +1,13 @@
 const path = require('path');
 
-function getProducts(req, res) {
-    res.sendFile(path.join(__dirname, '../view/products.html'));
-}
+const addProduct = (req, res) => {
+    console.log(req.body);
+    res.send({
+        message: "Product Added Successfully",
+        data: req.body
+    });
+};
 
 module.exports = {
-    getProducts
+    addProduct
 };

@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Product</title>
 </head>
 <body>
-    <h1>Fetching All Products</h1>
 
-    <form>
-        <label for="product">Product Name</label>
-        <input type="text" id="product" name="productName">
+    <h1>Add Product</h1>
 
-        <button type="submit">Add Product</button>
+    <form onsubmit="onSubmitHandler(event)">
+
+        <label for="product">
+            Product Name
+        </label>
+
+        <input
+            type="text"
+            id="product"
+            name="productName"
+        >
+
+        <button type="submit">
+            Add Product
+        </button>
+
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/product.js"></script>
+
 </body>
 </html>
